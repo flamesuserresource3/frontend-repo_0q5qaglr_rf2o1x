@@ -1,28 +1,58 @@
-import { useState } from 'react'
+import React, { useEffect } from 'react';
+import Hero from './components/Hero';
+import About from './components/About';
+import Projects from './components/Projects';
+import System from './components/System';
+import CTA from './components/CTA';
+import Footer from './components/Footer';
 
+// Single-page portfolio for Bro Ahmad — AI Creative Strategist
+// Layout: Hero → About → Projects → System → CTA → Footer
+// Includes lightweight SEO meta injection and smooth-scrolling.
 function App() {
-  const [count, setCount] = useState(0)
+  // Basic meta tags for SEO without extra dependencies
+  useEffect(() => {
+    document.title = 'Bro Ahmad — AI Creative Strategist | Human–Machine Collaboration';
+
+    const ensureMeta = (name, content) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('name', name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    ensureMeta(
+      'description',
+      'Portfolio of Bro Ahmad, AI Creative Strategist bridging humans and machines to build impactful, intelligent systems. Projects: VYNR, Fatloss OS, Beyond Campus.'
+    );
+    ensureMeta('keywords', 'Bro Ahmad, AI Strategist, AI Creative Strategist, Human Machine Collaboration, VYNR Project, AI Systems, Prompt Engineering');
+    ensureMeta('author', 'Bro Ahmad');
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="scroll-smooth bg-black">
+      {/* HERO SECTION */}
+      <Hero />
+
+      {/* ABOUT SECTION */}
+      <About />
+
+      {/* PROJECTS SECTION */}
+      <Projects />
+
+      {/* SYSTEM / WORKFLOW SECTION */}
+      <System />
+
+      {/* CTA SECTION */}
+      <CTA />
+
+      {/* FOOTER */}
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
